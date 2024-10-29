@@ -1,0 +1,33 @@
+.main-menu a {
+	padding:8px;
+	background: #fafafa;
+	border-radius: 3px;
+	margin: 2px;
+	display: block;
+}
+
+.main-menu a:hover {
+	color: #444;
+	background: #eaeaea;
+}
+
+h1 {
+	text-align: center;
+}
+
+#main-content {
+	text-align: center;
+}
+
+.back-main a {
+	padding:8px;
+	background: #fafafa;
+	border-radius: 3px;
+	margin: 2px;
+	display: block;
+}
+
+.back-main a:hover {
+	color: #444;
+	background: #f0f0f0;
+}
