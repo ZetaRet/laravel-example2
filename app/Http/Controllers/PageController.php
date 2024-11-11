@@ -10,6 +10,8 @@ use Carbon\Carbon;
 class PageController extends Controller
 {
 
+    public static $MaxPerProduct = 5;
+
     public function show(): View
     {
         return view('main');
@@ -147,24 +149,23 @@ class PageController extends Controller
             return $this->returnError('noBasket');
         }
 
-        $maxPerProduct = 5;
+        $maxPerProduct = self::$MaxPerProduct;
         $json['wallet'] = $checkUser->wallet;
         $json['total'] = 0;
         $now = Carbon::now();
         $json['products'] = array();
         $purchases = array();
         foreach ($userBasket as $product) {
+            if ($product->product_count == 0) continue;
             $count = $product->count;
-            if ($count > $maxPerProduct)
-                $count = $maxPerProduct;
-            if ($count > $product->product_count)
-                $count = $product->product_count;
+            $count = min($count, $maxPerProduct, $product->product_count);
             $inStoreCount = $product->product_count - $count;
             $left = DB::table('basket')->where('user_id', '!=', $user_id)
                 ->where('products_id', $product->products_id)
                 ->count();
-            if ($inStoreCount < $left) {
+            if ($inStoreCount < $left && $count > 1) {
                 $count -= $left - $inStoreCount;
+                if ($count < 1) $count = 1;
                 $inStoreCount = $product->product_count - $count;
             }
             $prData = array(
@@ -175,7 +176,7 @@ class PageController extends Controller
                 'purchased' => $product->count,
                 'count' => $count,
                 'stored' => $inStoreCount,
-                'left' => $left
+                'left' => $left,
             );
             $json['total'] += $count * $product->product_price;
             array_push($json['products'], $prData);
@@ -206,9 +207,11 @@ class PageController extends Controller
 
             DB::table('purchases')->insert($purchases);
             $json['wallet'] -= $json['total'];
-            DB::table('users')->where('id', $user_id)->update([
-                'wallet' => $json['wallet']
-            ]);
+            $userm = new User();
+            $userm->exists = true;
+            $userm->id = $user_id;
+            $userm->wallet = $json['wallet'];
+            $userm->save();
             DB::table('basket')->where('user_id', $user_id)->delete();
         }
 

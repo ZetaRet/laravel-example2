@@ -6,6 +6,9 @@
 <b>get products:</b> GET request to list all products from database<br/>
 <b>get csrf:</b> GET request to save in collection variables the form token, needed for POST requests<br/>
 <b>get basket:</b> GET request to retrieve current items in the basket and user wallet<br/>
+<b>increment basket:</b> POST request to set product in the basket plus 1, checks wallet total<br/>
+<b>decrement basket:</b> POST request to set product in the basket minus 1<br/>
+<b>clear basket:</b> POST request to clear the basket<br/>
 <b>update basket:</b> POST request to set products in the basket, real quantity is invisible on this step, checks wallet total, deletes previous basket<br/>
 <b>purchase basket:</b> POST request to sum transaction query and set the user purchase from the basket, checks all baskets to ensure 1 quantity left per user and manages maximum per product using stored total (per user max is 5), clears the basket<br/>
 </div>

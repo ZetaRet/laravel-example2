@@ -9,7 +9,7 @@
 <script src="{{ asset('js/app_example2.js') }}"></script>
 </head>
 <body>
-<div id="main-view" class="container">
+<div id="main-view" class="main-container">
 @yield('content')
 </div>
 </body>

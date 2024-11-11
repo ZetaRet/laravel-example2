@@ -1,6 +1,7 @@
 <?php
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\APIController;
 
 Route::get('/welcome/', function () {
     return view('welcome');
@@ -32,6 +33,18 @@ Route::post('/basket/purchase', [
 Route::get('/token/csrf', [
     PageController::class,
     'getCSRF'
+]);
+Route::post('/basket/increment', [
+    APIController::class,
+    'incrementBasket'
+]);
+Route::post('/basket/decrement', [
+    APIController::class,
+    'decrementBasket'
+]);
+Route::post('/basket/clear', [
+    APIController::class,
+    'clearBasket'
 ]);
 
 ?>

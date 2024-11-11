@@ -108,6 +108,87 @@
 			"response": []
 		},
 		{
+			"name": "increment basket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_token\": \"{{csrf}}\",\n    \"user_id\": 1,\n    \"product_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/basket/increment",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"basket",
+						"increment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "decrement basket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_token\": \"{{csrf}}\",\n    \"user_id\": 1,\n    \"product_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/basket/decrement",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"basket",
+						"decrement"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "clear basket",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"_token\": \"{{csrf}}\",\n    \"user_id\": 1\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/basket/clear",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"basket",
+						"clear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "update basket",
 			"request": {
 				"method": "POST",
