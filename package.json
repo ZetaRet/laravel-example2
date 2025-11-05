@@ -1,4 +1,6 @@
 {
+    "name": "laravel-example2",
+    "version": "1.0.2",
     "private": true,
     "type": "module",
     "scripts": {
